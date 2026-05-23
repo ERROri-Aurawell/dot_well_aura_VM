@@ -450,7 +450,25 @@ fn main() {
 
                         vm_registers[4] = new_v;
                     }
+                    // -------------------------------------------------------------
+                    // 8 - CONVERT:
+                    // -------------------------------------------------------------
+                    8 => {
+                        // A1 = O dado original (que veio de uma variável ou registrador)
+                        let dado_original = &vm_registers[1];
 
+                        // A2 = O tipo de destino (0 a 6) em formato string/usize
+                        let tipo_destino = match &vm_registers[2] {
+                            DataTypes::Operational(v) => v.to_string(),
+                            _ => panic!("Tipo de destino precisa ser Operational"),
+                        };
+
+                        // Executa a conversão e joga o resultado em A4
+                        match dado_original.convert_to(&tipo_destino) {
+                            Ok(resultado) => vm_registers[4] = resultado,
+                            Err(_) => panic!("CONVERSION ERROR IN: {}", l),
+                        }
+                    }
                     // -------------------------------------------------------------
                     // 60 - PARAR A EXECUÇÃO: Termina a VM retornando o status de A1
                     // -------------------------------------------------------------

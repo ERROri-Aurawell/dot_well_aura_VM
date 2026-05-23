@@ -11,6 +11,53 @@ pub enum DataTypes {
     Operational(usize),
     None,
 }
+
+impl DataTypes {
+    pub fn convert_to(&self, target_type: &str) -> Result<DataTypes, String> {
+        // Extrai o valor interno atual como uma String (ex: "42" ou "3.14")
+        let valor_str = match self {
+            DataTypes::String(v) => v.clone(),
+            DataTypes::I8(v) => v.to_string(),
+            DataTypes::I16(v) => v.to_string(),
+            DataTypes::I32(v) => v.to_string(),
+            DataTypes::Float(v) => v.to_string(),
+            DataTypes::Doble(v) => v.to_string(),
+            DataTypes::Operational(v) => v.to_string(),
+            DataTypes::None => "None".to_string(),
+        };
+
+        // Tenta dar parse no formato do tipo de destino
+        match target_type {
+            "0" => Ok(DataTypes::String(valor_str)),
+            "1" => valor_str
+                .parse()
+                .map(DataTypes::I8)
+                .map_err(|_| "Erro i8".into()),
+            "2" => valor_str
+                .parse()
+                .map(DataTypes::I16)
+                .map_err(|_| "Erro i16".into()),
+            "3" => valor_str
+                .parse()
+                .map(DataTypes::I32)
+                .map_err(|_| "Erro i32".into()),
+            "4" => valor_str
+                .parse()
+                .map(DataTypes::Float)
+                .map_err(|_| "Erro f32".into()),
+            "5" => valor_str
+                .parse()
+                .map(DataTypes::Doble)
+                .map_err(|_| "Erro f64".into()),
+            "6" => valor_str
+                .parse()
+                .map(DataTypes::Operational)
+                .map_err(|_| "Erro usize".into()),
+            _ => Err("Tipo de destino inválido".into()),
+        }
+    }
+}
+
 // Apenas um placeholder para o seu enum compilá-lo
 #[derive(Debug, Clone)]
 pub struct Memory {
