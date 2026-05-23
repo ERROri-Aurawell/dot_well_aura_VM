@@ -59,7 +59,7 @@ A1 - Conteúdo a ser printado;
 EXEMPLO:
 
 MOVE 0, B_NOME, A1;
-MOVE 0, A0;
+MOVE 1, A0;
 CALL;
 
 # Tipo de chamada: NOT / Reverse
