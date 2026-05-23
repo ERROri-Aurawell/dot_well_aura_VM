@@ -1,0 +1,108 @@
+//A0; Tipo da chamada.
+//A1; Entrada primária.
+//A2; Entrada secundária.
+//A3; Entrada terciária.
+//A4; Resposta do interpretador.
+
+// 1 - Print
+// A0 - tipo
+// A1 - Conteúdo
+
+// 2 - 
+//
+
+// 3 - IF TRUE JUMP;
+// A0 - tipo
+// A1 - true/false
+// A2 - Endereço
+
+// 4 - Expressão booleana
+// A0 - tipo
+// A1 - entrada 1
+// A2 - operador
+// A3 - entrada 2
+//
+// A2:
+// 0 - ==
+// 1 - !=
+// 2 - >
+// 3 - <
+// 4 - >=
+// 5 - <=
+// 6 - ||
+// 7 - &&
+
+// 0 - +
+// 1 - -
+// 2 - *
+// 3 - /
+// 4 - %
+// 5 - **
+
+// 60 - Para a execussão
+// A0 - tipo
+// A1 - retorno
+//
+
+.strings; //Valores fixos devem aparecer aqui em tempo de compilação
+"bacana";
+"carambolas";
+
+.values; //Valores fixos devem aparecer aqui em tempo de compilação
+0, 67;
+4, 3.000001;
+
+// 0 - i8
+// 1 - i16
+// 2 - i32
+// 3 - i64
+// 4 - f32
+// 5 - f64
+// 6 - usize
+
+_C0; //Labels.
+MOVE 6, %0, A1; //O valor da pilha de strings na posição 0;
+MOVE 6, 1, A0; //Print
+CALL;
+
+MOVE 6, 3, A0; // Operação de jump
+MOVE 1, 1, A1; // Literal "1" (que no caso, é true)
+MOVE 6, _C1, A2; //O endereço
+CALL;
+
+_main;
+NEW B0;
+MOVE 1, 1, B0; //Tipo 1 (i8), valor literal "1" (que no caso, é true), posição B0 
+MOVE 1, $B0, A1; //Põe o conteudo do B0 na primeira posição
+RM B0; // Remove a variavel B0 da existência
+MOVE 6, 0, A2; //Operador de igualdade
+MOVE 1, 1, A3; //Literal "1" (que no caso, é true)
+MOVE 6, 4, A0;
+CALL;
+MOVE 6, $A4, A1; //Resposta da operação movida para o A1
+
+MOVE 6, 1, A0; //1 - Print.
+CALL; //Imprime o que está dentro do A2
+
+MOVE 6, 3, A0; // IF TRUE.
+MOVE 6, _C0, A2; //Aponta o endereço.
+//A2 já possui o valor que precisamos nesse momento (1/true).
+CALL;
+
+//Aqui só é executado caso o resultado seja falso
+
+MOVE 1, A0;
+MOVE %1, A1; //O valor da pilha de strings na posição 1;
+CALL;
+
+_C1: //Ponto de retorno
+
+//Move 60 para o A0
+//Finalização de tipo 0 (sem erros)
+MOVE 60, A0;
+MOVE 0, A1;
+CALL;
+
+# - Console
+"1"
+"bacana"
