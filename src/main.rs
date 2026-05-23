@@ -89,7 +89,7 @@ fn main() {
     let mut line: usize;
     let mut running: bool = true;
 
-    line = find_label("_main");
+    line = find_label("_C_main");
 
     let content: Vec<&str> = AURA_FILE.lines().collect();
 
