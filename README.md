@@ -50,6 +50,7 @@ A0 - Tipo de chamada
 5 - MATH OPERATION
 6 - INCREMENTATION
 7 - DECREMENTATION
+8 - Conversion
 60 - EXIT
 
 ---
@@ -185,6 +186,21 @@ EXEMPLO:
 MOVE 7, A0;
 MOVE 1, A1; // i8
 CALL;
+
+# Tipo de chamada: Conversion
+A0 - Tipo de chamada;
+A1 - Dado original;
+A2 - Tipo de dado para conversão;
+A4 - Resultado
+
+Valores para A2:
+0 - String
+1 - I8
+2 - I16
+3 - I32
+4 - F32 (float)
+5 - F64 (double)
+6 - Operational (usize)
 
 # Tipo de chamada: EXIT
 A0 - Tipo de chamada;
