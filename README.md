@@ -1,7 +1,5 @@
 # AURA - Bytecode da linguagem Well. Versão humana (legível).
 DECLARAÇÃO DE LABELS:
-"_main"
-ou
 "_C_NOME"
 ---
 CRIAÇÃO DE VARIAVEIS:
@@ -34,6 +32,9 @@ Extras:
 
 Não atribuir o tipo automaticamente atribui como Operational.
 "MOVE 60, A0;"
+
+Mover uma variável para um registrador, ou para outro lugar leva o tipo junto automaticamente.
+Tentar inferir um tipo diferente do que a variável tem resultará em um comportamento indefinido.
 ---
 CHAMADAS DE SISTEMA:
 
